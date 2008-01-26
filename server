@@ -1,0 +1,41 @@
+#!/usr/bin/perl -w
+package MD5_Server;
+
+use strict;
+use Digest::MD5;
+use Crypt::DES;
+use WEC qw(loop);
+use WEC::Socket qw(inet);
+
+use lib "/home/ton/perl-modules/WEC-PlRPC/blib/lib";
+
+use WEC::PlRPC::Server;
+use base qw(WEC::PlRPC::Connection);
+
+WEC->init;
+my $cr = Crypt::DES->new(pack("H*", "b3a6d83ef3187ac4"));
+my ($socket, $address) = inet(LocalAddr => "localhost", 
+                              LocalPort => 2001, 
+                              Reuse	=> 1);
+
+my $cl = WEC::PlRPC::Server->new
+    (Handle		=> $socket,
+     # Paths		=> $address,
+     Application	=> "MD5_Server",
+     Version		=> "1.0",
+     Methods	=> {
+         MD5_Server => {
+             NewHandle		=> 1,
+             CallMethod		=> 1,
+             DestroyHandle	=> 1,
+         },
+         'Digest::MD5' => {
+             new => 1,
+             add => 1,
+             hexdigest => 1,
+         },
+     },
+     Cipher		=> $cr,
+);
+loop;
+

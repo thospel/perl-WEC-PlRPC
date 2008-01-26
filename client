@@ -1,0 +1,36 @@
+#!/usr/bin/perl -w
+use lib "/home/ton/perl-modules/WEC-PlRPC/blib/lib";
+
+use strict;
+use Crypt::DES;
+use WEC qw(loop);
+
+WEC->init;
+my $cr = Crypt::DES->new(pack("H*", "b3a6d83ef3187ac4"));
+
+use WEC::PlRPC::Client;
+my $cl = WEC::PlRPC::Client->new
+    (Destination	=> "tcp://localhost:2001",
+     Application	=> "MD5_Server",
+     Version		=> "1.0",
+     Cipher		=> $cr,
+     User		=> "bob");
+sub i { print "i: @_\n" }
+sub h { 
+    print "h: @_\n"; 
+    die "Done"; 
+}
+sub z {
+    print "@_\n";
+    $_[0]->add(\&i, 18);
+    $_[0]->add(\&i, 23);
+    $_[0]->add(\&i, 5);
+    $_[0]->hexdigest(\&h);
+}
+for (1..2) {
+    my $c = $cl->connect;
+    $c->ClientObject(\&z, "Digest::MD5" => "new");
+}
+print STDERR "loop\n";
+loop;
+print STDERR "Done\n";

@@ -1,0 +1,11 @@
+Revision history for Perl extension WEC::PlRPC.
+
+Todo:
+	- config like Net::Server
+	- Real user checking
+	- Not as a derived class
+
+0.01  Sat Jul 10 01:46:26 2004
+	- original version; created by h2xs 1.23 with options
+		-Xn WEC::PlRPC
+
