@@ -9,7 +9,7 @@ use Storable qw(nfreeze thaw);
 
 use WEC::Connection qw(SERVER CLIENT);
 
-our $VERSION = "0.01";
+our $VERSION = "1.000";
 
 use base qw(WEC::Connection);
 # use fields qw(greet objects);
@@ -254,7 +254,7 @@ sub DestroyHandle {
 
 
 package WEC::PlRPC::Proxy;
-our $VERSION = "0.01";
+our $VERSION = "1.000";
 our $AUTOLOAD;
 
 sub AUTOLOAD {

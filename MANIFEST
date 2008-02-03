@@ -7,3 +7,4 @@ lib/WEC/PlRPC/Client.pm
 lib/WEC/PlRPC/Server.pm
 lib/WEC/PlRPC/Connection.pm
 META.yml                                 Module meta-data (added by MakeMaker)
+md5-versions

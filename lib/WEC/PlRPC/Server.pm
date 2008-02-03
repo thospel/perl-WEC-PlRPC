@@ -6,7 +6,7 @@ use Carp;
 
 use WEC::PlRPC::Connection;
 
-our $VERSION = "0.01";
+our $VERSION = "1.000";
 our @CARP_NOT	= qw(WEC::FieldServer);
 
 use base qw(WEC::Server);
