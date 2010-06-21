@@ -79,7 +79,7 @@ sub message_body {
             unless ($options->{AcceptApplication} ?
                     $options->{AcceptApplication}->($connection, $options->{Application}, $app):
                     UNIVERSAL::isa($app, ref($connection))) {
-                $connection->send_close([0, "This is a " . 
+                $connection->send_close([0, "This is a " .
                                          ref($connection) . ", go away!"]);
                 return;
             }
@@ -178,7 +178,7 @@ sub message_body {
 # Call as $conn->send($data_ref)
 sub send : method {
     my $connection = shift;
-    die "Attempt to send on a closed Connection" unless 
+    die "Attempt to send on a closed Connection" unless
         $connection->{out_handle};
     my $encoded = nfreeze(shift);
     $encoded = Compress::Zlib::compress($encoded) if
@@ -197,7 +197,7 @@ sub send : method {
         $connection->{out_buffer} .= $encoded;
     }
     # This should be impossible. freeze, gzip and crypt should give bytes
-    die "Assertion: Output buffer is utf8" if 
+    die "Assertion: Output buffer is utf8" if
         utf8::is_utf8($connection->{out_buffer});
     # return;
 }
@@ -217,7 +217,7 @@ sub ClientObject {
 
 sub NewHandle {
     my $connection = shift;
-    # Untaint class and method so we won't get tainted objects. 
+    # Untaint class and method so we won't get tainted objects.
     # Should be ok since we will check if you may use them anyways
     my ($class)  = shift =~ /(.*)/s;
     my ($method) = shift =~ /(.*)/s;

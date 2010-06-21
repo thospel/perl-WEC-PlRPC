@@ -53,9 +53,9 @@ sub init {
         croak "Both OutCipher and Cipher" if defined $options->{OutCipher};
         $options->{InCipher} = $options->{OutCipher} = $cipher;
     }
-    $options->{InBlockSize} = $options->{InCipher}->blocksize if 
+    $options->{InBlockSize} = $options->{InCipher}->blocksize if
         $options->{InCipher};
-    $options->{OutBlockSize} = $options->{OutCipher}->blocksize if 
+    $options->{OutBlockSize} = $options->{OutCipher}->blocksize if
         $options->{OutCipher};
 }
 
